@@ -60,6 +60,3 @@ wwwroot/lib/
 TestResults/
 *.trx
 
-
-global.json
-**/global.json
