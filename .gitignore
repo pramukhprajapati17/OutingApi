@@ -1,0 +1,65 @@
+## Build results
+[Bb]in/
+[Oo]bj/
+**/[Bb]in/
+**/[Oo]bj/
+
+## Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Visual Studio Code
+.vscode/
+
+## NuGet Packages
+*.nupkg
+**/packages/*
+!**/packages/build/
+
+## OS generated files
+.DS_Store
+.DS_Store?
+ehthumbs.db
+Thumbs.db
+
+## Backup and Temp files
+*.bak
+*.tmp
+*.swp
+*~
+[Tt]emp/
+
+## Log files
+*.log
+
+## User Secrets & Environment
+# It is recommended to keep sensitive connection strings out of source control.
+# You can ignore appsettings.json if it contains secrets, 
+# or keep it and use environment variables/User Secrets for production values.
+appsettings.Development.json
+.env
+*.usersecrets
+*.http
+
+## JetBrains Rider
+.idea/
+*.sln.iml
+_ReSharper*/
+
+## Published output
+publish/
+out/
+dist/
+node_modules/
+wwwroot/lib/
+
+## Test results
+TestResults/
+*.trx
+
+
+global.json
+**/global.json
