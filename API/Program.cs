@@ -40,6 +40,12 @@ builder.Services.AddScoped<NpgsqlConnection>(sp =>
 
 builder.Services.AddScoped<IUserInterface, UserRepository>();
 
+// Register Redis service implemented in Repositories as a singleton
+builder.Services.AddSingleton<IRedisService, Repositories.Implementations.RedisService>();
+// Bind SmtpSettings and register mail service
+builder.Services.Configure<Repositories.Models.SmtpSettings>(builder.Configuration.GetSection("Smtp"));
+builder.Services.AddScoped<Repositories.Interfaces.IMailService, Repositories.Implementations.SmtpMailService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

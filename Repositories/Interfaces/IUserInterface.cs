@@ -9,5 +9,6 @@ namespace Repositories.Interfaces
     public interface IUserInterface
     {
         Task<int>RegisterUser(UserRegister user);
+        Task<UserRegister?> GetUserByEmail(string email);
     }
 }
