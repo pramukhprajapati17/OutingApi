@@ -1,0 +1,16 @@
+bin/
+obj/
+**/bin/
+**/obj/
+.vs/
+.idea/
+*.user
+*.suo
+*.log
+*.vspscc
+.DS_Store
+node_modules/
+_ReSharper*/
+**/publish/
+**/*.db
+secrets.json
