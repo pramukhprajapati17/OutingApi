@@ -26,6 +26,14 @@ namespace API.Controllers
         [Route("registerUser")]
         public async Task<IActionResult> RegisterUser([FromForm]UserRegister user)
         {
+            if (string.IsNullOrWhiteSpace(user.Email))
+                return BadRequest("Email is required");
+
+            // if mail already exists, return conflict
+            var existing = await _user.GetUserByEmail(user.Email ?? string.Empty);
+            if (existing != null)
+                return Conflict("Mail already exists");
+
             // generate OTP and store pending registration in Redis for 5 minutes
             var otp = Random.Shared.Next(100000, 999999).ToString();
             await _redis.SetPendingRegistrationAsync(user.Email ?? string.Empty, user, otp, TimeSpan.FromMinutes(5));
@@ -42,7 +50,7 @@ namespace API.Controllers
                 return StatusCode(500, "Failed to send OTP email: " + ex.Message);
             }
 
-            return Ok(new { message = "OTP sent to user", });
+            return Ok(new { message = "OTP sent to user" });
         }
 
         [HttpPost]

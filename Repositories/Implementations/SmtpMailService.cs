@@ -48,8 +48,9 @@ namespace Repositories.Implementations
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Failed to send email to {ToEmail} with subject {Subject}", toEmail, subject);
-                throw; // Re-throw the exception to be handled by the caller
+                // Log full exception with stack and inner exceptions so Render logs capture the exact SMTP failure
+                _logger.LogError("SMTP send failed for {ToEmail} subject={Subject} exception={Exception}", toEmail, subject, ex.ToString());
+                throw;
             }
         }
 
