@@ -19,6 +19,18 @@ FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/publish .
 
+# Ensure OTP templates are copied into the final image
+COPY Repositories/Templates ./Templates
+
+# Install CA certificates, openssl and Kerberos GSSAPI libs so TLS and native
+# drivers (libgssapi_krb5) work inside the container.
+RUN apt-get update \
+	&& apt-get install -y --no-install-recommends \
+	   ca-certificates \
+	   openssl \
+	   libgssapi-krb5-2 \
+	&& rm -rf /var/lib/apt/lists/*
+
 # Don't hardcode the port; use the Render-provided $PORT at runtime.
 # We provide a sensible default of 5000 if PORT is not set.
 ENV PORT=5000

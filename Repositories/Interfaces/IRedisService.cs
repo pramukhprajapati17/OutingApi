@@ -9,5 +9,7 @@ namespace Repositories.Interfaces
         Task SetPendingRegistrationAsync(string email, UserRegister user, string otp, TimeSpan ttl);
         Task<(UserRegister? user, string? otp)> GetPendingRegistrationAsync(string email);
         Task RemovePendingRegistrationAsync(string email);
+        // Ping Redis to verify connectivity
+        Task<bool> PingAsync();
     }
 }

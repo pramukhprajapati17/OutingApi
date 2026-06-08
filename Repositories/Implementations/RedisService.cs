@@ -135,6 +135,19 @@ namespace Repositories.Implementations
             await _db.KeyDeleteAsync(Key(email));
         }
 
+        public async Task<bool> PingAsync()
+        {
+            try
+            {
+                var pong = await _db.PingAsync();
+                return pong.TotalMilliseconds >= 0;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public void Dispose()
         {
             _muxer?.Dispose();
